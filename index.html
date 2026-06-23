@@ -209,6 +209,32 @@
     </div>
   </header>
 
+  <!-- PREREQ -->
+  <section class="reveal">
+    <div class="sec-head"><h2>0단계 · 사전 준비 (처음 한 번)</h2></div>
+    <p class="sec-sub">아래가 없으면 시작할 수 없습니다. 한 번만 갖추면 됩니다.</p>
+    <div class="grid2">
+      <div class="scard v">
+        <h3>설치 · 계정</h3>
+        <ul>
+          <li><b>Claude Code</b> 설치 + 로그인 — <code class="inline">npm install -g @anthropic-ai/claude-code</code> (또는 데스크톱 앱). Anthropic 구독/결제 필요</li>
+          <li><b>git</b> 설치 — 클론용, <b>클론 전에 먼저</b></li>
+          <li><b>Node.js 18+</b> — 방법 B·도구용</li>
+          <li><b>Higgsfield 계정</b> — 가입·로그인, 이미지 생성은 크레딧/유료 필요할 수 있음</li>
+        </ul>
+      </div>
+      <div class="scard s">
+        <h3>저장소 접근 권한</h3>
+        <ul>
+          <li><code class="inline">chrono</code>는 <b>비공개</b> 저장소</li>
+          <li>관리자에게 <b>협업자 초대</b>를 받고 <b>수락</b></li>
+          <li>git이 GitHub에 인증돼 있어야 클론됨 (HTTPS면 Personal Access Token)</li>
+        </ul>
+        <p style="margin:12px 0 0;font-size:13px;color:var(--ink-soft)">⚠️ Windows에서 스크립트가 막히면(running scripts is disabled): <code class="inline">powershell -ExecutionPolicy Bypass -File install.ps1</code></p>
+      </div>
+    </div>
+  </section>
+
   <!-- QUICK START -->
   <section class="reveal">
     <div class="sec-head"><h2>빠른 시작 — 1분 설치</h2></div>
@@ -243,38 +269,36 @@ bash install.sh</pre>
   <!-- PATH A -->
   <section class="reveal">
     <div class="sec-head"><h2>방법 A · Higgsfield</h2><span class="badge-rec">권장 · 설치 불필요</span></div>
-    <p class="sec-sub">Claude Code 안에서 한국어로 말하면 바로 생성됩니다. 배경 제거·업스케일까지 한 번에.</p>
+    <p class="sec-sub">자기 Higgsfield 계정을 Claude Code에 연결합니다. <b>기본 방법(.mcp.json)을 우선</b> 쓰고, 안 되면 보조 방법.</p>
     <div class="steps">
       <div class="step">
         <div class="num">1</div>
         <div>
-          <span class="tag">최초 1회만</span>
-          <h3>Higgsfield 계정 연결</h3>
-          <p>클론한 폴더엔 <code class="inline">.mcp.json</code>이 있어 <b>이 폴더에서 Claude Code를 열면 <code class="inline">higgsfield</code> 서버가 자동 등록</b>됩니다(허용 프롬프트가 뜨면 승인). 그다음 <code class="inline">/mcp</code> → <code class="inline">higgsfield</code> 선택 → 브라우저에서 로그인하고 <b>Authorize(허용)</b>까지 누르면 끝.</p>
+          <span class="tag">기본 · .mcp.json (http)</span>
+          <h3>프로젝트 MCP로 연결</h3>
+          <p>클론한 <code class="inline">chrono</code> 폴더엔 <code class="inline">.mcp.json</code>이 있어, <b>이 폴더에서 Claude Code를 열면 <code class="inline">higgsfield</code> 서버가 자동 등록</b>됩니다(허용 프롬프트 승인). 그다음 <code class="inline">/mcp</code> → <code class="inline">higgsfield</code> → 브라우저 로그인 + <b>Authorize</b> → 다시 <code class="inline">/mcp</code>로 connected 확인.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">+</div>
+        <div>
+          <span class="tag">추가 · claude.ai 관리형 커넥터</span>
+          <h3>대안 연결</h3>
+          <p>기본이 안 되거나 claude.ai 커넥터를 선호하면: <code class="inline">/mcp</code> → <b>"claude.ai Higgsfield"</b> 선택 → 로그인 + Authorize. <b>둘 중 하나만</b> 쓰세요(동시 사용 시 도구 중복).</p>
         </div>
       </div>
       <div class="step">
         <div class="num">2</div>
         <div>
           <h3>이미지 요청 — 그냥 말로</h3>
-          <p>모델 선택·생성·대기·결과 확인을 Claude가 알아서 진행합니다.</p>
           <div class="say">마녀모자 쓴 할로윈 주점을 GPT Image 2로 만들어줘</div>
         </div>
       </div>
       <div class="step">
         <div class="num">3</div>
         <div>
-          <h3>배경 투명하게 (배치용 에셋이면 필수)</h3>
-          <p>마을에 올릴 오브젝트는 투명 PNG로 컷아웃합니다.</p>
-          <div class="say">방금 이미지 배경 투명하게 만들어줘</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="num">4</div>
-        <div>
-          <h3>변형 세트 만들기</h3>
-          <p>색·크기·시즌만 바꿔 시리즈로. 건물 형태까지 똑같이 두려면 원본을 레퍼런스로 넣어 “모자만 교체”로 요청하세요.</p>
-          <div class="say">같은 건물로 모자 색만 4가지 다르게 만들어줘</div>
+          <h3>마무리 — 투명 / 규격화</h3>
+          <p>마을 에셋은 <b>"배경 투명하게"</b>로 컷아웃. 스테이지는 <code class="inline">tools/crop-2048x1024.ps1</code>로 <b>2048×1024</b> 규격화.</p>
         </div>
       </div>
     </div>
@@ -401,7 +425,7 @@ bash install.sh</pre>
         <ol style="margin:0 0 6px;padding-left:20px">
           <li>요청 — <i>"화산지대 스테이지 만들어줘"</i></li>
           <li>16:9로 생성 (GPT Image 2 권장)</li>
-          <li><b>2048×1024로 크롭</b> (배경 제거 ❌)</li>
+          <li><b>2048×1024로 크롭</b> (배경 제거 ❌) — <code class="inline">tools/crop-2048x1024.ps1</code></li>
           <li>오브젝트 디테일만 바꿔 변형</li>
         </ol>
       </div>
