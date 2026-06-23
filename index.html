@@ -340,6 +340,29 @@ OPENAI_API_KEY=본인_키</pre>
     <p class="sec-sub" style="margin-top:14px">⚠️ 이 경로는 <b>투명배경 자동 컷아웃이 없음</b> — 마을 에셋은 단색 배경 생성 후 외부 도구로 컷아웃 필요(Higgsfield 경로는 자동).</p>
   </section>
 
+  <!-- PATH D MANUAL -->
+  <section class="reveal">
+    <div class="sec-head"><h2>🌐 API·CLI 없이? 웹에서 수동</h2></div>
+    <p class="sec-sub">키도 Claude Code도 없으면, 브라우저 웹 UI(ChatGPT / Gemini / Higgsfield)만으로도 됩니다.</p>
+    <div class="grid2">
+      <div class="scard s">
+        <h3>순서</h3>
+        <ol style="margin:0;padding-left:20px">
+          <li>웹 서비스 로그인 (ChatGPT / Gemini / Higgsfield)</li>
+          <li>프롬프트 템플릿 복사 (<code class="inline">PROMPTING.md</code> / <code class="inline">STAGE-BACKGROUNDS.md</code>)</li>
+          <li>붙여넣고 생성 → <b>다운로드</b></li>
+          <li>(스테이지) <code class="inline">crop-resize.ps1</code>로 규격화</li>
+          <li>(마을·투명 필요) remove.bg 등으로 배경 제거</li>
+        </ol>
+      </div>
+      <div class="scard v">
+        <h3>바로 복붙 예시 (스테이지)</h3>
+        <pre style="font-size:12px;line-height:1.6">밝고 깔끔한 카툰 2D 스테이지 배경, 벨트스크롤(좌우 균등 + 공백 리듬), 큼직한 덩어리 데포르메, 오브젝트 상단 절반·하단은 빈 플레이 레인, 좌상단 단일 광원, 파스텔·낮은 콘트라스트(양끝단 금지), 전경만 콘트라스트 강조. [바이옴: 화산]. 실사·3D 금지.</pre>
+      </div>
+    </div>
+    <p class="sec-sub" style="margin-top:14px">⚠️ 화풍·규격을 사람이 직접 챙겨야 함. 반복·대량 작업엔 방법 A~B 권장.</p>
+  </section>
+
   <!-- ASSET TRACKS INTRO -->
   <section class="reveal">
     <div class="sec-head"><h2>두 가지 에셋, 두 가지 제작법</h2></div>
