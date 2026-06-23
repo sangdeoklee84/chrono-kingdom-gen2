@@ -116,12 +116,12 @@
   /* ---- code / command ---- */
   code.inline{
     font-family:var(--font-mono);font-size:14px;background:#fff;
-    border:2px solid var(--ink);border-radius:7px;padding:1px 7px;font-weight:600;
+    border:2px solid var(--ink);border-radius:7px;padding:1px 7px;font-weight:600;overflow-wrap:anywhere;word-break:break-word;
   }
   pre{
     font-family:var(--font-mono);font-size:13.5px;line-height:1.7;margin:12px 0 0;
     background:var(--ink);color:#FCEAD2;border-radius:14px;padding:16px 18px;
-    overflow-x:auto;box-shadow:var(--shadow-sm);
+    overflow-x:auto;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;box-shadow:var(--shadow-sm);
   }
   pre .cm{color:#E59B5C;}
   .say{
@@ -166,7 +166,7 @@
   .repo{
     display:inline-flex;align-items:center;gap:12px;font-family:var(--font-mono);
     font-size:15px;font-weight:700;background:var(--ink);color:#FCEAD2;
-    border:3px solid var(--ink);border-radius:14px;padding:14px 22px;
+    border:3px solid var(--ink);border-radius:14px;padding:14px 22px;max-width:100%;overflow-wrap:anywhere;word-break:break-word;
     box-shadow:var(--shadow);text-decoration:none;
   }
   footer .small{margin-top:18px;color:var(--ink-soft);font-size:13px;}
