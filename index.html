@@ -205,7 +205,7 @@
 
     <div class="paths-note">
       <span class="chip"><span class="dot" style="background:var(--accent-2)"></span>방법 A · Higgsfield (권장)</span>
-      <span class="chip"><span class="dot" style="background:var(--accent-3)"></span>방법 B · Gemini 스크립트</span>
+      <span class="chip"><span class="dot" style="background:var(--accent-3)"></span>방법 B · Gemini / GPT</span>
     </div>
   </header>
 
@@ -306,33 +306,38 @@ bash install.sh</pre>
 
   <!-- PATH B -->
   <section class="reveal">
-    <div class="sec-head"><h2>방법 B · Gemini 스크립트</h2></div>
-    <p class="sec-sub">명령어로 대량 생성하거나 기존 이미지를 편집할 때. Node 18+ 필요.</p>
+    <div class="sec-head"><h2>방법 B · Gemini / GPT 스크립트 (Higgsfield 없이)</h2></div>
+    <p class="sec-sub">Higgsfield 계정이 없어도 OK — <b>Gemini</b> 또는 <b>GPT(OpenAI)</b> API 키만으로 생성. Node 18+ 필요.</p>
     <div class="steps">
       <div class="step alt">
         <div class="num">1</div>
         <div>
           <span class="tag">최초 1회만</span>
-          <h3>키만 채우기</h3>
-          <p>설치 스크립트가 <code class="inline">.env</code>를 이미 만들어 뒀습니다. Google AI Studio에서 키를 발급(이미지 모델은 결제 활성화 필요)해 그 파일에 붙여넣기만 하면 됩니다.</p>
-          <pre><span class="cm"># .env 파일을 열어:</span> GEMINI_API_KEY=본인_키</pre>
+          <h3>키 채우기 (.env)</h3>
+          <p>설치 스크립트가 만든 <code class="inline">.env</code>에 <b>쓰는 쪽 키만</b> 넣으면 됩니다. (둘 다 결제 필요)</p>
+          <pre><span class="cm"># 둘 중 쓰는 것만:</span>
+GEMINI_API_KEY=본인_키
+OPENAI_API_KEY=본인_키</pre>
         </div>
       </div>
       <div class="step alt">
         <div class="num">2</div>
         <div>
-          <h3>새 이미지 생성</h3>
-          <pre>node --env-file=.env gemini/gen.mjs "프롬프트" out/결과.png</pre>
+          <h3>Gemini로 생성 / 편집</h3>
+          <pre>node --env-file=.env gemini/gen.mjs "프롬프트" out/결과.png
+<span class="cm"># 기존 이미지 편집:</span> ... --in 원본.png</pre>
         </div>
       </div>
       <div class="step alt">
         <div class="num">3</div>
         <div>
-          <h3>기존 이미지 편집 / 합성</h3>
-          <pre>node --env-file=.env gemini/gen.mjs "이 건물을 파괴 상태로" out/결과.png <span class="cm">--in</span> 원본.png</pre>
+          <h3>GPT(OpenAI)로 생성</h3>
+          <pre>node --env-file=.env openai/gen.mjs "프롬프트" out/결과.png --size 1536x1024</pre>
+          <p style="margin:8px 0 0;font-size:13px;color:var(--ink-soft)">size: 1024x1024 / 1536x1024 / 1024x1536. 스테이지는 이후 <code class="inline">crop-resize</code>로 규격화.</p>
         </div>
       </div>
     </div>
+    <p class="sec-sub" style="margin-top:14px">⚠️ 이 경로는 <b>투명배경 자동 컷아웃이 없음</b> — 마을 에셋은 단색 배경 생성 후 외부 도구로 컷아웃 필요(Higgsfield 경로는 자동).</p>
   </section>
 
   <!-- ASSET TRACKS INTRO -->
@@ -425,7 +430,7 @@ bash install.sh</pre>
         <ol style="margin:0 0 6px;padding-left:20px">
           <li>요청 — <i>"화산지대 스테이지 만들어줘"</i></li>
           <li>16:9로 생성 (GPT Image 2 권장)</li>
-          <li><b>2048×1024로 크롭</b> (배경 제거 ❌) — <code class="inline">tools/crop-2048x1024.ps1</code></li>
+          <li><b>2048×1024로 크롭</b> — <code class="inline">crop-2048x1024.ps1</code> (보스 2600×1600·투기장 2560×1080은 <code class="inline">crop-resize</code>)</li>
           <li>오브젝트 디테일만 바꿔 변형</li>
         </ol>
       </div>
