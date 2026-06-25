@@ -338,31 +338,39 @@ OPENAI_API_KEY=본인_키</pre>
   <!-- PATH D MANUAL -->
   <section class="reveal">
     <div class="sec-head"><h2>🌐 API·CLI 없이? 웹에서 수동</h2></div>
-    <p class="sec-sub">키도 Claude Code도 없으면, 브라우저 웹 UI(ChatGPT / Gemini / Higgsfield)만으로도 됩니다.</p>
-    <div class="scard v" style="margin:14px 0;border-left:6px solid var(--accent)">
-      <h3>💬 ChatGPT만 쓰는 팀원용 (무설치 요약)</h3>
-      <ol style="margin:6px 0 0;padding-left:20px">
-        <li>아래 복붙 예시를 붙여넣고 <b>가로(Landscape)</b>로 생성 — ChatGPT엔 16:9·2:1 옵션이 없어 1536×1024로 나옵니다.</li>
-        <li><b>3종 화풍 통일</b>: 첫 결과 이미지를 같은 대화에 <b>첨부</b>하고 "같은 스타일로 오브젝트만 교체"라고 요청.</li>
-        <li><b>규격화(2048×1024)</b>: <a href="https://www.photopea.com" target="_blank" rel="noopener">Photopea</a> 무료 웹(설치·가입 불필요)에서 2048×1024 캔버스에 맞춰 PNG로 내보내기.</li>
-        <li>스테이지는 <b>배경 제거 안 함</b>(꽉 찬 배경).</li>
-      </ol>
-    </div>
+    <p class="sec-sub">키도 Claude Code도 없으면 <b>브라우저 웹</b>만으로도 됩니다. 쓰는 서비스(지피티 / 제미나이)에 맞춰 아래에서 골라 따라하세요.</p>
     <div class="grid2">
-      <div class="scard s">
-        <h3>순서</h3>
-        <ol style="margin:0;padding-left:20px">
-          <li>웹 서비스 로그인 (ChatGPT 권장 / Gemini / Higgsfield)</li>
-          <li>아래 "복붙 예시" 프롬프트 복사 → 붙여넣고 <b>가로(Landscape)</b>로 생성</li>
-          <li>결과 <b>다운로드</b> (ChatGPT는 16:9·2:1 옵션이 없어 1536×1024로 나옴)</li>
-          <li><b>규격화(무설치)</b> — <a href="https://www.photopea.com" target="_blank" rel="noopener">Photopea</a> 무료 웹: <code class="inline">File→New 2048×1024</code> → 이미지 드래그 → 꽉 맞춤 → <code class="inline">File→Export as→PNG</code></li>
-          <li>배경 제거 <b>안 함</b> (꽉 찬 배경)</li>
-        </ol>
-      </div>
       <div class="scard v">
-        <h3>바로 복붙 예시 (스테이지)</h3>
-        <pre style="font-size:12px;line-height:1.6">밝고 깔끔한 카툰 2D 스테이지 배경, 외곽선 없음. 벨트스크롤·좌우 루프(양 끝이 오브젝트를 가로질러 반복), 가운데 집중·중앙 히어로 금지. 큼직한 덩어리 데포르메. 모든 오브젝트 밑동은 화면 약 48% 한 지면선에 정렬, 밀집은 상단 20~48%, 50% 아래로는 아무것도 없음(하단 절반은 빈 모래 플레이 레인, 긴 그림자만). 전경은 거의 비우고 큰 전경물(말뚝·유목·덤불) 금지 — 맨 아래 모서리 작은 잘린 실루엣만. 좌상단 단일 광원, 파스텔·낮은 콘트라스트(검정/순백/형광 금지). [바이옴: 화산]. 실사·3D·CGI 금지.</pre>
+        <h3>💬 지피티 (ChatGPT · chatgpt.com)</h3>
+        <ol style="margin:6px 0 0;padding-left:20px">
+          <li><b>로그인</b> — chatgpt.com 접속·로그인. (이미지 생성은 유료 플랜/크레딧이 필요할 수 있음)</li>
+          <li><b>프롬프트 입력</b> — 아래 "복붙 프롬프트"를 붙여넣고, 끝에 <code class="inline">가로(landscape)로 그려줘</code>를 덧붙입니다.</li>
+          <li><b>비율 주의</b> — ChatGPT엔 16:9·2:1 정밀 옵션이 <b>없습니다.</b> 가로로 요청하면 보통 <b>1536×1024(3:2)</b>로 나옵니다 → 그대로 받고 아래 규격화에서 크롭.</li>
+          <li><b>세트(여러 장) 화풍 통일</b> — 첫 결과가 좋으면 <b>같은 대화에서</b> "이 스타일·구도 그대로 오브젝트만 ○○로 바꿔줘"라고 이어서 요청. 또는 <code class="inline">style-anchors/stage_stylesheet.jpg</code>를 <b>첨부</b>해 "이 스타일로"라고 지시.</li>
+          <li><b>다운로드</b> → 아래 "규격화(공통)"으로.</li>
+        </ol>
+        <p style="margin:10px 0 0;font-size:13px;color:var(--ink-soft)">👍 간판·글자 렌더링이 비교적 정확. 한 번에 1장씩 생성.</p>
       </div>
+      <div class="scard s">
+        <h3>🟢 제미나이 (Gemini · gemini.google.com)</h3>
+        <ol style="margin:6px 0 0;padding-left:20px">
+          <li><b>로그인</b> — gemini.google.com 접속(더 세밀히 제어하려면 <a href="https://aistudio.google.com" target="_blank" rel="noopener">AI Studio</a>). 이미지 생성 모델(Nano Banana 계열) 사용.</li>
+          <li><b>프롬프트 입력</b> — 아래 "복붙 프롬프트"를 그대로 붙여넣고 <code class="inline">가로/와이드</code>로 요청.</li>
+          <li><b>비율 주의</b> — 정밀 2:1은 없음. 비율이 들쭉날쭉하면 "가로로 다시 그려줘"로 재요청 → 아래 규격화에서 크롭.</li>
+          <li><b>레퍼런스 첨부가 강점</b> — 기존 그림(<code class="inline">style-anchors/stage_stylesheet.jpg</code> 또는 첫 결과)을 <b>업로드</b>하고 "이 그림 스타일·구도로 ○○ 스테이지"라고 하면 톤·구도가 잘 유지됩니다. (이미지 편집·합성에 강함)</li>
+          <li><b>다운로드</b> → 아래 "규격화(공통)"으로.</li>
+        </ol>
+        <p style="margin:10px 0 0;font-size:13px;color:var(--ink-soft)">👍 레퍼런스 이미지 첨부·편집(image-to-image)에 강함. AI Studio는 더 세밀한 제어 가능.</p>
+      </div>
+    </div>
+    <div class="scard v" style="margin-top:18px">
+      <h3>📋 복붙 프롬프트 (지피티·제미나이 공통)</h3>
+      <pre style="font-size:12px;line-height:1.6">밝고 깔끔한 카툰 2D 스테이지 배경, 외곽선 없음. 벨트스크롤·좌우 루프(양 끝이 오브젝트를 가로질러 반복), 가운데 집중·중앙 히어로 금지. 큼직한 덩어리 데포르메. 모든 오브젝트 밑동은 화면 약 48% 한 지면선에 정렬, 밀집은 상단 20~48%, 50% 아래로는 아무것도 없음(하단 절반은 빈 모래 플레이 레인, 긴 그림자만). 전경은 거의 비우고 큰 전경물(말뚝·유목·덤불) 금지 — 맨 아래 모서리 작은 잘린 실루엣만. 좌상단 단일 광원, 파스텔·낮은 콘트라스트(검정/순백/형광 금지). [바이옴: 화산]. 실사·3D·CGI 금지.</pre>
+      <p style="margin:8px 0 0;font-size:13px;color:var(--ink-soft)"><code class="inline">[바이옴: 화산]</code> 부분만 초원·설원·사막·해안·항구 등으로 바꾸면 다른 스테이지가 됩니다.</p>
+    </div>
+    <div class="scard s" style="margin-top:14px">
+      <h3>📐 규격화 (공통 · 무설치)</h3>
+      <p style="margin:6px 0 0"><a href="https://www.photopea.com" target="_blank" rel="noopener">Photopea</a> 무료 웹(설치·가입 불필요): <code class="inline">File → New</code>로 <b>2048 × 1024</b> 캔버스 생성 → 받은 이미지를 드래그해 가로를 꽉 채우고 <b>위(하늘)를 더 잘라</b> 하단 플레이 레인을 살림 → <code class="inline">File → Export as → PNG</code>. 스테이지는 <b>배경 제거 안 함</b>(꽉 찬 배경).</p>
     </div>
     <p class="sec-sub" style="margin-top:14px">⚠️ 화풍·규격을 사람이 직접 챙겨야 함. 반복·대량 작업엔 방법 A~B 권장.</p>
   </section>
