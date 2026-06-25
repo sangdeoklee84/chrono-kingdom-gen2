@@ -201,6 +201,33 @@
   .cd-bub .cd-add{font-weight:800;color:var(--accent);}
   .cd-bub img{display:block;width:100%;border-radius:10px;border:2px solid var(--ink);margin-top:6px;}
   .cd-cap{font-size:11.5px;color:var(--ink-soft);margin-top:6px;line-height:1.45;}
+
+  /* ---- 사전작업: 규약 문서 지도 + 입수 ---- */
+  .prep{border:3px solid var(--ink);border-radius:22px;background:var(--panel);box-shadow:var(--shadow);padding:22px 24px;margin:0 0 22px;}
+  .prep h3{font-size:19px;font-weight:900;margin:0 0 4px;}
+  .prep .lead{color:var(--ink-soft);font-size:14px;margin:0 0 16px;}
+  .docmap{display:flex;flex-direction:column;gap:10px;margin:0;}
+  .docrow{display:grid;grid-template-columns:auto 1fr;gap:13px;align-items:center;padding:11px 14px;border:2.5px solid var(--ink);border-radius:14px;background:#FFFDF8;}
+  .docrow .fchip{font-family:var(--font-mono);font-size:12.5px;font-weight:800;background:var(--panel-2);border:2px solid var(--ink);border-radius:9px;padding:5px 10px;white-space:nowrap;text-align:center;}
+  .docrow .fchip.key{background:#FFE7D3;border-color:var(--accent);}
+  .docrow .d{font-size:13.5px;line-height:1.5;}
+  .flowarrow{text-align:center;font-size:15px;color:var(--accent);margin:13px 0 12px;font-weight:800;}
+  .getroutes{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .getcard{border:2.5px solid var(--ink);border-radius:14px;padding:14px 16px;}
+  .getcard.a{background:#EFF6FF;}
+  .getcard.b{background:#FFF1E4;}
+  .getcard h4{margin:0 0 8px;font-size:14.5px;font-weight:900;}
+  .getcard ol{margin:0;padding-left:18px;font-size:13px;line-height:1.6;}
+  /* ---- 축소형 채팅 목업 ---- */
+  .chatdemo.mini{max-width:420px;box-shadow:var(--shadow-sm);}
+  .chatdemo.mini .cd-head{padding:9px 14px;font-size:12.5px;}
+  .chatdemo.mini .cd-body{padding:13px;gap:10px;}
+  .chatdemo.mini .cd-av{width:24px;height:24px;flex-basis:24px;font-size:12px;}
+  .chatdemo.mini .cd-bub{font-size:12.5px;padding:8px 10px;border-width:2px;}
+  .chatdemo.mini .cd-bub .pr{font-size:10.5px;}
+  .chatdemo.mini .cd-bub img{max-width:220px;margin-top:4px;}
+  .chatdemo.mini .cd-cap{font-size:10px;}
+  @media(max-width:640px){.getroutes{grid-template-columns:1fr;}.docrow{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -355,8 +382,38 @@ OPENAI_API_KEY=본인_키</pre>
   <section class="reveal">
     <div class="sec-head"><h2>🌐 API·CLI 없이? 웹에서 수동</h2></div>
     <p class="sec-sub">키도 Claude Code도 없으면, 브라우저 웹 UI(ChatGPT / Gemini / Higgsfield)만으로도 됩니다.</p>
+    <!-- PREP DOCS -->
+    <div class="prep">
+      <h3>🗂️ 먼저 · 규약 문서부터 챙기기 (사전작업)</h3>
+      <p class="lead">프롬프트를 짜기 전에, <b>어떤 규약이 어느 문서에 있는지</b> 알고 그 문서를 손에 넣는 게 먼저입니다. 셀셰이딩 화풍·베이스 타일 규약은 전부 아래 문서에 정의돼 있어요.</p>
+      <div class="docmap">
+        <div class="docrow"><span class="fchip">README.md</span><div class="d"><b>여기서 시작</b> — 전체 사용법, 생성 경로(A·B·D), 폴더 구조 안내.</div></div>
+        <div class="docrow"><span class="fchip key">PROMPTING.md</span><div class="d"><b>핵심 규약 전부</b> — 셀셰이딩 화풍 규칙(짙은 갈색 외곽선 · 2~3단 셰이딩 · 중간 파스텔) · 2:1 아이소 베이스 타일(접지 footprint) · 권장 파라미터 · 납품 체크리스트.</div></div>
+        <div class="docrow"><span class="fchip">style-anchors/</span><div class="d"><b>화풍 통일용 첨부 이미지</b> — <code class="inline">village_stylesheet.jpg</code>. 첨부하면 화풍·베이스타일이 통일됩니다(image-to-image).</div></div>
+      </div>
+      <div class="flowarrow">↓ 이 문서들을 손에 넣는 두 가지 방법 ↓</div>
+      <div class="getroutes">
+        <div class="getcard a">
+          <h4>🅰️ Claude Code · git 있는 사람</h4>
+          <ol>
+            <li>위 <b>빠른 시작</b>대로 <code class="inline">git clone</code></li>
+            <li>폴더 안에 <b>README · PROMPTING.md · style-anchors가 모두 들어있음</b></li>
+            <li>그대로 열어 규약 확인 → 생성으로</li>
+          </ol>
+        </div>
+        <div class="getcard b">
+          <h4>🅱️ Claude/git 없이 ChatGPT·Gemini만</h4>
+          <ol>
+            <li>비공개 repo <b>협업자 초대 수락</b> (관리자에게 요청)</li>
+            <li>GitHub 웹에서 <code class="inline">chrono-village</code> 접속 → <b>PROMPTING.md 열어 본문 전체 복사</b></li>
+            <li><code class="inline">style-anchors/</code>의 <b>village_stylesheet.jpg → Raw → 우클릭 저장(다운로드)</b></li>
+            <li>복사한 규약은 대화에 <b>붙여넣고</b>, 앵커 이미지는 <b>첨부</b> → 아래처럼 생성</li>
+          </ol>
+        </div>
+      </div>
+    </div>
     <!-- CHAT MOCKUP -->
-    <div class="chatdemo">
+    <div class="chatdemo mini">
       <div class="cd-head"><span class="dot" style="background:#10a37f"></span>💬 ChatGPT · 🟢 Gemini — 실제 대화는 이렇게 흘러갑니다</div>
       <div class="cd-body">
         <div class="cd-row me"><div class="cd-av">🧑</div><div class="cd-bub"><span class="pr">둥근 셀셰이딩 2D 게임 오브젝트 … (아래 복붙 프롬프트 전체)</span><span class="cd-add">+ [대상: 빵집], 단색 배경에 그려줘</span></div></div>
