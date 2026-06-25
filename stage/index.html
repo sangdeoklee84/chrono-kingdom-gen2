@@ -339,20 +339,29 @@ OPENAI_API_KEY=본인_키</pre>
   <section class="reveal">
     <div class="sec-head"><h2>🌐 API·CLI 없이? 웹에서 수동</h2></div>
     <p class="sec-sub">키도 Claude Code도 없으면, 브라우저 웹 UI(ChatGPT / Gemini / Higgsfield)만으로도 됩니다.</p>
+    <div class="scard v" style="margin:14px 0;border-left:6px solid var(--accent)">
+      <h3>💬 ChatGPT만 쓰는 팀원용 (무설치 요약)</h3>
+      <ol style="margin:6px 0 0;padding-left:20px">
+        <li>아래 복붙 예시를 붙여넣고 <b>가로(Landscape)</b>로 생성 — ChatGPT엔 16:9·2:1 옵션이 없어 1536×1024로 나옵니다.</li>
+        <li><b>3종 화풍 통일</b>: 첫 결과 이미지를 같은 대화에 <b>첨부</b>하고 "같은 스타일로 오브젝트만 교체"라고 요청.</li>
+        <li><b>규격화(2048×1024)</b>: <a href="https://www.photopea.com" target="_blank" rel="noopener">Photopea</a> 무료 웹(설치·가입 불필요)에서 2048×1024 캔버스에 맞춰 PNG로 내보내기.</li>
+        <li>스테이지는 <b>배경 제거 안 함</b>(꽉 찬 배경).</li>
+      </ol>
+    </div>
     <div class="grid2">
       <div class="scard s">
         <h3>순서</h3>
         <ol style="margin:0;padding-left:20px">
-          <li>웹 서비스 로그인 (ChatGPT / Gemini / Higgsfield)</li>
-          <li>프롬프트 템플릿 복사 (<code class="inline">STAGE-BACKGROUNDS.md</code>)</li>
-          <li>붙여넣고 생성 → <b>다운로드</b></li>
-          <li>(스테이지) <code class="inline">crop-resize.ps1</code>로 규격화</li>
-          <li>받은 이미지를 16:9 → 2048×1024로 크롭 (배경 제거 X)</li>
+          <li>웹 서비스 로그인 (ChatGPT 권장 / Gemini / Higgsfield)</li>
+          <li>아래 "복붙 예시" 프롬프트 복사 → 붙여넣고 <b>가로(Landscape)</b>로 생성</li>
+          <li>결과 <b>다운로드</b> (ChatGPT는 16:9·2:1 옵션이 없어 1536×1024로 나옴)</li>
+          <li><b>규격화(무설치)</b> — <a href="https://www.photopea.com" target="_blank" rel="noopener">Photopea</a> 무료 웹: <code class="inline">File→New 2048×1024</code> → 이미지 드래그 → 꽉 맞춤 → <code class="inline">File→Export as→PNG</code></li>
+          <li>배경 제거 <b>안 함</b> (꽉 찬 배경)</li>
         </ol>
       </div>
       <div class="scard v">
         <h3>바로 복붙 예시 (스테이지)</h3>
-        <pre style="font-size:12px;line-height:1.6">밝고 깔끔한 카툰 2D 스테이지 배경, 벨트스크롤(좌우 균등 + 공백 리듬), 큼직한 덩어리 데포르메, 오브젝트 상단 절반·하단은 빈 플레이 레인, 좌상단 단일 광원, 파스텔·낮은 콘트라스트(양끝단 금지), 전경만 콘트라스트 강조. [바이옴: 화산]. 실사·3D 금지.</pre>
+        <pre style="font-size:12px;line-height:1.6">밝고 깔끔한 카툰 2D 스테이지 배경, 외곽선 없음. 벨트스크롤·좌우 루프(양 끝이 오브젝트를 가로질러 반복), 가운데 집중·중앙 히어로 금지. 큼직한 덩어리 데포르메. 모든 오브젝트 밑동은 화면 약 48% 한 지면선에 정렬, 밀집은 상단 20~48%, 50% 아래로는 아무것도 없음(하단 절반은 빈 모래 플레이 레인, 긴 그림자만). 전경은 거의 비우고 큰 전경물(말뚝·유목·덤불) 금지 — 맨 아래 모서리 작은 잘린 실루엣만. 좌상단 단일 광원, 파스텔·낮은 콘트라스트(검정/순백/형광 금지). [바이옴: 화산]. 실사·3D·CGI 금지.</pre>
       </div>
     </div>
     <p class="sec-sub" style="margin-top:14px">⚠️ 화풍·규격을 사람이 직접 챙겨야 함. 반복·대량 작업엔 방법 A~B 권장.</p>
@@ -388,7 +397,7 @@ OPENAI_API_KEY=본인_키</pre>
           <li><b>파스텔 · 낮은 콘트라스트</b></li>
           <li>팔레트 <b>양 끝단 금지</b> (검정/순백/형광 ❌)</li>
           <li>색 다양성 유지 (베이스 + 포인트·보색)</li>
-          <li><b>전경만 콘트라스트 강조</b> — 3단 깊이</li>
+          <li><b>전경은 거의 비움</b> — 큰 전경물 ❌, 깊이는 바닥 그림자로</li>
         </ul>
       </div>
       <div class="scard v">
