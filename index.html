@@ -8,7 +8,7 @@
 <style>
   :root{
     --ground:#FBEFD9; --panel:#FFFAF0; --ink:#3A2A1E; --ink-soft:#6E5848;
-    --accent:#F0742A; --village:#6E4AA6; --stage:#2E9E78; --line:#3A2A1E;
+    --accent:#F0742A; --village:#6E4AA6; --stage:#2E9E78; --landmark:#B84A0A; --line:#3A2A1E;
     --shadow:6px 6px 0 rgba(58,42,30,.16); --shadow-sm:4px 4px 0 rgba(58,42,30,.16);
     --font:"Segoe UI","Malgun Gothic",system-ui,-apple-system,sans-serif;
   }
@@ -23,8 +23,9 @@
   h1{font-weight:900;font-size:clamp(32px,6vw,60px);margin:24px 0 0;letter-spacing:-.02em;line-height:1.08;}
   h1 .pop{color:var(--accent);}
   .lead{max-width:600px;margin:18px auto 0;font-size:clamp(15px,2.2vw,19px);color:var(--ink-soft);font-weight:500;}
-  .cards{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:44px 0 56px;}
-  @media(max-width:680px){.cards{grid-template-columns:1fr;}}
+  .cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin:44px 0 56px;}
+  @media(max-width:820px){.cards{grid-template-columns:1fr 1fr;}}
+  @media(max-width:540px){.cards{grid-template-columns:1fr;}}
   .card{display:block;text-decoration:none;color:inherit;background:var(--panel);
     border:3px solid var(--line);border-radius:22px;box-shadow:var(--shadow);
     padding:30px 26px;transition:transform .12s ease,box-shadow .12s ease;}
@@ -35,10 +36,12 @@
     border-radius:999px;padding:4px 12px;color:#fff;margin-bottom:12px;}
   .card.v .who{background:var(--village);}
   .card.s .who{background:var(--stage);}
+  .card.l .who{background:var(--landmark);}
   .card ul{margin:10px 0 0;padding-left:18px;color:var(--ink-soft);font-size:15px;}
   .card .go{margin-top:18px;font-weight:800;color:var(--accent);}
   .card.v{border-top:10px solid var(--village);}
   .card.s{border-top:10px solid var(--stage);}
+  .card.l{border-top:10px solid var(--landmark);}
   footer{text-align:center;padding:0 0 56px;color:var(--ink-soft);font-size:14px;}
   footer a{color:inherit;font-weight:700;}
 </style>
@@ -73,6 +76,17 @@
         <li>꽉 찬 배경 (배경 제거 X)</li>
       </ul>
       <div class="go">스테이지 배경 가이드 열기 →</div>
+    </a>
+    <a class="card l" href="./landmark/">
+      <div class="emoji">🗿</div>
+      <div class="who">스테이지 UI · 아이소메트릭</div>
+      <h2>랜드마크 아이콘</h2>
+      <ul>
+        <li>스테이지별 UI 아이콘</li>
+        <li>셀쉐이딩, 30° 아이소메트릭</li>
+        <li>투명 배경 PNG · 1k 해상도</li>
+      </ul>
+      <div class="go">랜드마크 가이드 열기 →</div>
     </a>
   </div>
 

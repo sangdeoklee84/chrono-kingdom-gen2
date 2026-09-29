@@ -9,6 +9,14 @@
 > 이 저장소에는 비밀 정보가 없습니다 — 안내 문서와 예시 이미지뿐입니다.
 > 그래서 public으로 두어도 안전하며, GitHub Pages로 누구나 가이드를 열람할 수 있습니다.
 
+## 가이드 페이지 목록
+
+| 에셋 유형 | URL | 연결 저장소 |
+|---|---|---|
+| 🏘️ 마을 에셋 (스텔라 킹덤) | `/kingdom/` | chrono-village |
+| 🗺️ 스테이지 배경 | `/stage/` | chrono-stage |
+| 🗿 랜드마크 아이콘 | `/landmark/` | — (Higgsfield 로컬 워크플로우) |
+
 ## GitHub Pages 켜는 법 (저장소 소유자)
 `Settings → Pages → Source: Deploy from a branch → Branch: main / 폴더: / (root) → Save`
 → 잠시 후 위 온보딩 페이지 주소가 활성화됩니다.

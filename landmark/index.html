@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="크로노스피어 랜드마크 아이콘 생성 — Higgsfield AI 제작 가이드">
+<title>크로노스피어 랜드마크 아이콘 생성 가이드</title>
+<style>
+  :root{
+    --ground:#FBEFD9;
+    --panel:#FFFAF0;
+    --panel-2:#FFF3DD;
+    --ink:#3A2A1E;
+    --ink-soft:#6E5848;
+    --accent:#F0742A;
+    --landmark:#B84A0A;
+    --landmark-bg:#FFF0E8;
+    --landmark-muted:#7A3008;
+    --ok:#2E9E78;
+    --warn:#C23A1E;
+    --line:#3A2A1E;
+    --shadow:6px 6px 0 rgba(58,42,30,.16);
+    --shadow-sm:4px 4px 0 rgba(58,42,30,.16);
+    --font:"Segoe UI","Malgun Gothic",system-ui,-apple-system,sans-serif;
+    --mono:ui-monospace,"Cascadia Code",Consolas,monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:var(--font);font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(rgba(58,42,30,.05) 1.4px,transparent 1.4px);
+    background-size:22px 22px;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
+  h1,h2,h3{line-height:1.08;margin:0;letter-spacing:-.02em;}
+  a{color:inherit;}
+
+  /* eyebrow */
+  .eyebrow{
+    display:inline-block;font-weight:800;font-size:13px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--landmark);
+    border:2.5px solid var(--ink);background:#fff;border-radius:999px;
+    padding:6px 16px;box-shadow:var(--shadow-sm);
+  }
+
+  /* hero */
+  .hero{padding:72px 0 40px;text-align:center;}
+  .hero h1{font-weight:900;font-size:clamp(34px,6.4vw,68px);margin:24px 0 0;}
+  .hero h1 .pop{color:var(--landmark);}
+  .hero p.lead{
+    max-width:620px;margin:20px auto 0;font-size:clamp(16px,2.2vw,20px);
+    color:var(--ink-soft);font-weight:500;
+  }
+
+  /* stat chips */
+  .stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:40px 0 0;}
+  .stat{
+    display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;
+    border:2.5px solid var(--ink);border-radius:14px;padding:10px 18px;background:#fff;
+    box-shadow:var(--shadow-sm);
+  }
+  .stat .dot{width:13px;height:13px;border-radius:50%;border:2px solid var(--ink);}
+  .dot-lm{background:var(--landmark);}
+  .dot-ok{background:var(--ok);}
+  .dot-warn{background:var(--warn);}
+
+  /* section */
+  section{padding:48px 0;}
+  .sec-head{display:flex;align-items:center;gap:16px;margin-bottom:8px;}
+  .sec-head h2{font-weight:900;font-size:clamp(24px,3.6vw,34px);}
+  .badge-rec{
+    font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    background:var(--landmark);color:#fff;border:2.5px solid var(--ink);
+    border-radius:999px;padding:5px 13px;box-shadow:var(--shadow-sm);white-space:nowrap;
+  }
+  .sec-sub{color:var(--ink-soft);font-weight:500;margin:0 0 28px;}
+
+  /* step cards */
+  .steps{display:flex;flex-direction:column;gap:18px;}
+  .step{
+    display:grid;grid-template-columns:64px 1fr;gap:20px;align-items:start;
+    background:var(--panel);border:3px solid var(--ink);border-radius:22px;
+    padding:22px 24px;box-shadow:var(--shadow);
+  }
+  .step .num{
+    width:64px;height:64px;border-radius:18px;border:3px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:26px;color:#fff;
+    background:var(--landmark);box-shadow:var(--shadow-sm);
+  }
+  .step.alt .num{background:var(--ok);}
+  .step h3{font-size:19px;font-weight:800;margin-bottom:6px;}
+  .step p{margin:0;color:var(--ink-soft);}
+  .step .tag{
+    display:inline-block;font-size:12px;font-weight:800;color:var(--landmark-muted);
+    background:var(--landmark-bg);border:2px solid var(--landmark);border-radius:8px;
+    padding:2px 9px;margin-bottom:8px;letter-spacing:.02em;
+  }
+
+  /* code */
+  code{
+    font-family:var(--mono);font-size:14px;background:#fff;
+    border:2px solid var(--ink);border-radius:7px;padding:1px 7px;font-weight:600;
+    overflow-wrap:anywhere;word-break:break-word;
+  }
+  pre{
+    font-family:var(--mono);font-size:13px;line-height:1.7;margin:12px 0 0;
+    background:var(--ink);color:#FCEAD2;border-radius:14px;padding:16px 18px;
+    overflow-x:auto;white-space:pre-wrap;word-break:break-word;
+    box-shadow:var(--shadow-sm);
+  }
+  pre .cm{color:#E59B5C;}
+  pre .hl{color:#FFD080;font-weight:700;}
+  .say{
+    font-family:var(--mono);font-size:14px;background:#FFF3DD;
+    border:2px dashed var(--accent);border-radius:12px;padding:11px 16px;margin-top:12px;
+    color:var(--ink);font-weight:600;
+  }
+  .say::before{content:"💬  ";}
+
+  /* rule grid */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .rcard{border:3px solid var(--ink);border-radius:22px;padding:24px;box-shadow:var(--shadow);}
+  .rcard.ok{background:#E8F8F1;border-top:8px solid var(--ok);}
+  .rcard.ng{background:#FFF0EC;border-top:8px solid var(--warn);}
+  .rcard h3{font-size:18px;font-weight:900;margin-bottom:12px;}
+  .rcard ul{margin:0;padding-left:18px;}
+  .rcard li{margin:7px 0;color:var(--ink-soft);font-size:15px;}
+  .rcard li b{color:var(--ink);}
+
+  /* anchor table */
+  .tbl-wrap{overflow-x:auto;margin-top:6px;}
+  table{border-collapse:collapse;width:100%;font-size:15px;}
+  th,td{border:2px solid var(--ink);padding:10px 14px;text-align:left;}
+  th{background:var(--ink);color:#FCEAD2;font-weight:800;font-size:13px;letter-spacing:.04em;}
+  tr:nth-child(even) td{background:var(--panel-2);}
+  td code{font-size:12.5px;border-color:rgba(58,42,30,.3);}
+
+  /* checklist */
+  .checklist{
+    background:var(--panel);border:3px solid var(--ink);border-radius:22px;
+    padding:28px 30px;box-shadow:var(--shadow);
+  }
+  .check-item{
+    display:flex;align-items:flex-start;gap:14px;padding:10px 0;
+    border-bottom:1.5px solid rgba(58,42,30,.1);
+  }
+  .check-item:last-child{border-bottom:none;}
+  .check-box{
+    width:26px;height:26px;border-radius:8px;border:2.5px solid var(--ink);
+    background:#fff;flex-shrink:0;margin-top:2px;
+  }
+  .check-text{flex:1;}
+  .check-text b{display:block;font-size:16px;font-weight:800;}
+  .check-text span{font-size:14px;color:var(--ink-soft);}
+  .check-ok{color:var(--ok);font-size:13px;font-weight:700;margin-top:2px;display:block;}
+  .check-ng{color:var(--warn);font-size:13px;font-weight:700;display:block;}
+
+  /* prompt template */
+  .prompt-box{
+    background:var(--ink);color:#FCEAD2;border-radius:18px;padding:24px 28px;
+    box-shadow:var(--shadow);margin-top:6px;
+  }
+  .prompt-box pre{background:transparent;padding:0;margin:0;box-shadow:none;font-size:13.5px;}
+  .ph{color:#90C8A0;}
+  .kw{color:#FFD080;font-weight:700;}
+
+  /* footer */
+  footer{padding:56px 0 80px;text-align:center;}
+  .back-link{
+    display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);
+    font-size:15px;font-weight:700;background:var(--ink);color:#FCEAD2;
+    border:3px solid var(--ink);border-radius:14px;padding:14px 22px;
+    box-shadow:var(--shadow);text-decoration:none;
+  }
+  footer .small{margin-top:18px;color:var(--ink-soft);font-size:13px;}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  @media(max-width:720px){
+    .grid2{grid-template-columns:1fr;}
+    .step{grid-template-columns:52px 1fr;gap:14px;padding:18px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="eyebrow">크로노스피어 · 랜드마크 아이콘</span>
+    <h1>스테이지 랜드마크를<br><span class="pop">Higgsfield로 만드는 법</span></h1>
+    <p class="lead">스테이지 배경 이미지를 참조해 랜드마크 아이콘 PNG를 생성합니다.<br>셀쉐이딩 아이소메트릭 아이콘 &mdash; Higgsfield gpt_image_2_5 전용 가이드.</p>
+    <div class="stats">
+      <div class="stat"><div class="dot dot-lm"></div>gpt_image_2_5 &middot; 1k 해상도</div>
+      <div class="stat"><div class="dot dot-ok"></div>01~23 + EX01~11 완료</div>
+      <div class="stat"><div class="dot dot-warn"></div>24·25 배경 제거 필요</div>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <h2>6단계 제작 순서</h2>
+      <span class="badge-rec">Step-by-step</span>
+    </div>
+    <p class="sec-sub">신규 스테이지 하나당 이 순서대로 진행합니다.</p>
+    <div class="steps">
+
+      <div class="step reveal">
+        <div class="num">1</div>
+        <div>
+          <div class="tag">배경 분석</div>
+          <h3>스테이지 배경 이미지 확인</h3>
+          <p>
+            <code>Stage_IMG\IMG_[스테이지] NN 이름.jpg</code> 파일을 열어<br>
+            컨셉 컬러 팔레트, 주요 오브젝트, 분위기를 파악합니다.<br>
+            대형 참조 시트: <code>스테이지 이미지_랜드마크_001~004.jpg</code>
+          </p>
+        </div>
+      </div>
+
+      <div class="step reveal">
+        <div class="num">2</div>
+        <div>
+          <div class="tag">컨셉 기획</div>
+          <h3>랜드마크 컨셉 3종 선정</h3>
+          <p>
+            배경에서 랜드마크로 만들 수 있는 구조물 후보를 3개 뽑습니다.<br>
+            각 컨셉은 <b>메인 오브젝트 + 베이스 소재 + 이펙트 요소</b>로 정의하세요.
+          </p>
+          <div class="say">예시 &mdash; TuskGate (상아 아치), GothicArch (장미 고딕 아치), CrystalSpire (수정 첨탑)</div>
+        </div>
+      </div>
+
+      <div class="step reveal">
+        <div class="num">3</div>
+        <div>
+          <div class="tag">앵커 준비</div>
+          <h3>앵커 이미지 업로드 (스타일 레퍼런스)</h3>
+          <p>
+            스테이지 테마에 맞는 앵커 파일 <b>2개</b> + <code>landmark_base.png</code>를 Higgsfield에 업로드합니다.<br>
+            아래 앵커 테이블에서 테마별 파일을 선택하세요.
+          </p>
+          <pre><span class="cm"># 한국어 경로 파일은 C:\Temp\ 에 복사 후 업로드</span>
+<span class="cm"># PowerShell: media_upload → PUT → media_confirm</span>
+[System.IO.File]::Copy($_.FullName, <span class="hl">"C:\Temp\anchor.png"</span>, $true)
+$bytes = [System.IO.File]::ReadAllBytes(<span class="hl">"C:\Temp\anchor.png"</span>)
+$wc = New-Object System.Net.WebClient
+$wc.UploadData($upload_url, <span class="hl">"PUT"</span>, $bytes)</pre>
+          <div class="say">새 세션을 열 때마다 media_id가 만료됩니다. 재업로드 필요.</div>
+        </div>
+      </div>
+
+      <div class="step alt reveal">
+        <div class="num">4</div>
+        <div>
+          <div class="tag">배치 생성</div>
+          <h3>generate_image_batch 실행</h3>
+          <p>
+            컨셉 3종을 한 배치에 묶어 최대 12개까지 한 번에 생성합니다.<br>
+            아래 프롬프트 템플릿의 <code>[placeholder]</code>를 교체해 사용하세요.
+          </p>
+          <pre>generate_image_batch(requests: [
+  { index: 0, params: {
+    <span class="hl">model: "gpt_image_2_5",</span>
+    prompt: "...",
+    aspect_ratio: <span class="hl">"1:1"</span>,
+    background: <span class="hl">"transparent"</span>,
+    quality: <span class="hl">"high"</span>,
+    resolution: <span class="hl">"1k"</span>,
+    medias: [{ value: media_id, role: <span class="hl">"image_references"</span> }, ...]
+  }},
+  { index: 1, params: { ... } }, <span class="cm">// 컨셉 B</span>
+  { index: 2, params: { ... } }  <span class="cm">// 컨셉 C</span>
+])
+→ jobs_wait(jobs: [...])
+→ show_generation_by_ids(jobs: [...])</pre>
+        </div>
+      </div>
+
+      <div class="step reveal">
+        <div class="num">5</div>
+        <div>
+          <div class="tag">검수</div>
+          <h3>8개 항목 체크리스트 확인</h3>
+          <p>
+            결과물이 아래 스타일 규격을 모두 충족하는지 확인합니다.<br>
+            통과 못 한 항목이 있으면 프롬프트를 수정해 다음 버전(vN+1)을 생성합니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="step alt reveal">
+        <div class="num">6</div>
+        <div>
+          <div class="tag">최종 저장</div>
+          <h3>버전 폴더 → 루트 복사</h3>
+          <p>매 배치는 <code>신규생성\vN\</code> 폴더에 저장합니다. 최종 확정본만 루트로 복사하세요.</p>
+          <pre><span class="cm"># PowerShell 결과 다운로드</span>
+$wc = New-Object System.Net.WebClient
+$wc.DownloadFile($result_url, <span class="hl">"D:\경로\신규생성\v1\26A_컨셉.png"</span>)
+
+<span class="cm"># 최종 확정 후 루트 복사</span>
+[System.IO.File]::Copy(
+  <span class="hl">"신규생성\vN\26F_TuskGate.png"</span>,
+  <span class="hl">"stage_Landmark\26_Nest_Pantra.png"</span>,
+  $true
+)</pre>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>검수 체크리스트</h2>
+      <span class="badge-rec">Step 5 상세</span>
+    </div>
+    <p class="sec-sub">8개 항목을 순서대로 확인합니다. 하나라도 NG면 다음 버전을 생성합니다.</p>
+    <div class="checklist reveal">
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <b>외곽선 — thin / fine</b>
+          <span>얇고 깔끔한 선. thick·medium-weight 표현은 AI가 과도하게 두껍게 렌더링함.</span>
+          <span class="check-ng">❌ v6~v12 내내 반복된 실수 &mdash; 프롬프트에 "thin/fine"을 명시하지 않으면 항상 두꺼워짐</span>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <b>셀쉐이딩 — 하드엣지 플랫, 3단계</b>
+          <span>Bright highlight / Mid-tone / Deep shadow. 각 존 내부는 단색 플랫 채색.</span>
+          <span class="check-ng">❌ 소프트 그라디언트 금지</span>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <b>채도 — 절제된 채도</b>
+          <span>선명하되 네온·과포화 금지. 기존 레퍼런스(11_Ice_Cave, 02_Spirit_Forest) 수준.</span>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <b>베이스 — 원형 디스크, 장식 없음</b>
+          <span>소재의 자연 컷오프 엣지. 금색 테두리·하트 림·데코 프레임 없어야 함.</span>
+          <span class="check-ng">❌ 별도 장식 테두리가 생기면 베이스가 별도 플랫폼처럼 보임</span>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <b>크기 리듬 — 100 : 60 : 35</b>
+          <span>반복 요소(장미, 뼈 등)는 크기 단계가 있어야 함. 모두 같은 크기면 NG.</span>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <b>데포르메 수준 — 3~4개 오브젝트, 단순 실루엣</b>
+          <span>기존 랜드마크 수준의 단순함. 1k 해상도에서 디테일이 과하면 NG.</span>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <b>외곽 확산 글로우 없음</b>
+          <span>아이콘 실루엣 전체를 감싸는 헤이즈·오라·헤일로 금지.</span>
+          <span class="check-ok">✅ 광원(캔들·용암·보석·눈) 주변 로컬 글로우는 허용</span>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <b>배경 투명 (알파)</b>
+          <span>PNG 알파 채널 확인. 배경이 흰색으로 채워져 있으면 NG.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>스타일 규칙</h2>
+    </div>
+    <p class="sec-sub">v6~v15 제작 과정에서 반복된 수정사항을 정리한 핵심 규칙입니다.</p>
+    <div class="grid2 reveal">
+      <div class="rcard ok">
+        <h3>✅ 해야 할 것</h3>
+        <ul>
+          <li>프롬프트에 반드시 <b>"thin"</b> 또는 <b>"fine"</b> 명시</li>
+          <li>셀쉐이딩: <b>"hard-edge flat"</b>, 3 tonal zones</li>
+          <li>크기 리듬: <b>"1 large (100%), 2 medium (60%), 2 small (35%)"</b></li>
+          <li>뼈 볼륨: <b>두께/길이 비율 45%</b>, 관절 끝 둥글게</li>
+          <li>베이스: <b>"natural material cutoff &mdash; clean, defined edge"</b></li>
+          <li>광원 글로우: 캔들·용암·보석 인접 로컬만 허용</li>
+          <li>배치마다 <b>vN 폴더</b>에 저장 (버전 추적)</li>
+        </ul>
+      </div>
+      <div class="rcard ng">
+        <h3>❌ 하지 말 것</h3>
+        <ul>
+          <li><b>"thick"</b> 또는 <b>"medium-weight"</b> 아웃라인</li>
+          <li>소프트 그라디언트 채색</li>
+          <li>네온 과포화 (neon, over-vivid)</li>
+          <li>베이스에 금색 테두리·하트 림·데코 프레임</li>
+          <li>아이콘 전체를 감싸는 확산 글로우·헤이즈·오라</li>
+          <li>같은 크기 반복 요소 (리듬 없는 구성)</li>
+          <li>최종 저장 없이 신규생성 폴더에만 남기기</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>프롬프트 완성 템플릿</h2>
+    </div>
+    <p class="sec-sub"><code style="font-size:14px;">[대괄호]</code> 부분을 스테이지에 맞게 교체하세요.</p>
+    <div class="prompt-box reveal">
+<pre>Mobile game UI icon, isometric top-down view at 30 degrees.
+
+<span class="ph">[스테이지명]</span> landmark &mdash; <span class="ph">[컨셉명]</span>:
+<span class="ph">[주요 오브젝트 설명 &mdash; 3~4개 요소만. 크기/색상 명시]</span>
+<span class="ph">[크기 리듬: "1 large (100%), 2 medium (60%), 2 small (35%)"]</span>
+
+<span class="kw">BASE:</span> Flat circular disc of <span class="ph">[concept material &mdash; 돌/잔디/타일 등]</span>.
+Base edge is the natural material cutoff &mdash; clean, defined edge.
+NO decorative border, rim, or added frame around the base perimeter.
+
+<span class="kw">STYLE:</span>
+- Simplified stylized cartoon art &mdash; bold rounded shapes,
+  mobile game icon level of detail. Deformed cartoon proportions.
+  Only 3-4 main visual elements. NOT realistic.
+- <span class="kw">Thin clean black outlines</span> &mdash; NOT thick, NOT medium, fine lines only.
+- Hard-edge flat cel-shading, 3 distinct tonal zones
+  (bright highlight / mid-tone / deep shadow).
+  Flat fills within each zone. NOT soft gradient.
+- Controlled saturation &mdash; NOT neon, NOT over-vivid.
+- No diffuse outer glow, no halo.
+  Localized glow from light sources only.
+
+Fantasy RPG mobile game icon art. Circular composition, 75-80% frame fill.
+No text, no UI elements. Same art style as the reference images.</pre>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>앵커 파일 테이블</h2>
+    </div>
+    <p class="sec-sub">테마에 맞는 파일 2개 + <code>landmark_base.png</code>를 함께 업로드하세요.<br>
+    media_id는 세션마다 만료 &mdash; 새 세션에서는 재업로드 필요.</p>
+    <div class="tbl-wrap reveal">
+      <table>
+        <thead>
+          <tr><th>테마</th><th>앵커 파일</th><th>media_id (세션별 만료)</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>베이스 레퍼런스</td>
+            <td><code>landmark_base.png</code></td>
+            <td><code>3ddddf3f-df98-4020-b947-86c169657e0d</code></td>
+          </tr>
+          <tr>
+            <td>어두운 제단·동굴</td>
+            <td><code>21_Witch's_Altar.png</code></td>
+            <td><code>43c5908f-48ff-4c11-ada1-f3630e99ddff</code></td>
+          </tr>
+          <tr>
+            <td>화려한 구조물·꽃</td>
+            <td><code>17_Ancient_Temple.png</code></td>
+            <td><code>024eb339-dd10-4e38-bc04-95395ed7452c</code></td>
+          </tr>
+          <tr>
+            <td>얼음·수정</td>
+            <td><code>11_Ice_Cave.png</code>, <code>18_Crystal_Mine.png</code></td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td>불·용암</td>
+            <td><code>13_Burning_Forest.png</code>, <code>12_Burning_Dock.png</code></td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td>자연·숲</td>
+            <td><code>02_Spirit_Forest.png</code>, <code>01_Beach.png</code></td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td>사막·유적</td>
+            <td><code>22_desert_temple.png</code>, <code>09_Wall_of_Wailing.png</code></td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td>설원·고지</td>
+            <td><code>19_Snowy_Mountain.png</code>, <code>05_Highlands.png</code></td>
+            <td>&mdash;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>완료 현황</h2>
+      <span class="badge-rec">2026.09.29</span>
+    </div>
+    <div class="tbl-wrap reveal">
+      <table>
+        <thead>
+          <tr><th>범위</th><th>상태</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>01~23 스테이지</td><td>✅ PNG 완료</td></tr>
+          <tr><td>EX_01~11 던전</td><td>✅ PNG 완료</td></tr>
+          <tr><td>24 Mushroom Forest</td><td>⚠️ JPG &rarr; 배경 제거 필요</td></tr>
+          <tr><td>25 Destroyed Dock</td><td>⚠️ JPG &rarr; 배경 제거 필요</td></tr>
+          <tr><td>26 Nest Pantra</td><td>✅ PNG 완료 (26F_TuskGate, v15)</td></tr>
+          <tr><td>27 Succubus Lair</td><td>✅ PNG 완료 (27E_GothicArch, v15)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:18px;padding:20px 24px;background:#FFF0EC;border:3px solid var(--ink);border-radius:18px;box-shadow:var(--shadow-sm);">
+      <b style="color:var(--warn);">⚠️ 24·25 배경 제거 방법</b><br>
+      <span style="color:var(--ink-soft);font-size:15px;">
+        포토샵에서 흰 배경 제거 후 <code>NN_StageName.png</code>로 저장.<br>
+        또는 Higgsfield: <code>media_upload &rarr; generate_image(remove_bg: true)</code>
+      </span>
+    </div>
+  </section>
+
+  <footer>
+    <a class="back-link" href="../">&#8592; 에셋 유형 선택으로 돌아가기</a>
+    <p class="small">크로노스피어 랜드마크 아이콘 생성 · 🏘️ <a href="https://sangdeoklee84.github.io/chrono-kingdom-gen2/kingdom/">마을 에셋 가이드</a> · 🗺️ <a href="https://sangdeoklee84.github.io/chrono-kingdom-gen2/stage/">스테이지 배경 가이드</a> · 막히면 Claude Code에게 물어보세요</p>
+  </footer>
+
+</div>
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
