@@ -185,6 +185,40 @@
     .grid2{grid-template-columns:1fr;}
     .step{grid-template-columns:52px 1fr;gap:14px;padding:18px;}
   }
+
+  /* ---- method chooser ---- */
+  .paths-note{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:40px 0 0;}
+  .chip{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:15px;
+    border:2.5px solid var(--ink);border-radius:14px;padding:10px 18px;background:#fff;box-shadow:var(--shadow-sm);}
+  .chip .dot{width:13px;height:13px;border-radius:50%;border:2px solid var(--ink);}
+
+  /* ---- chat mockup ---- */
+  .chatdemo{border:3px solid var(--ink);border-radius:22px;background:var(--panel);box-shadow:var(--shadow);overflow:hidden;max-width:500px;margin:0 auto;}
+  .chatdemo .cd-head{display:flex;align-items:center;gap:9px;padding:13px 18px;background:var(--panel-2);border-bottom:3px solid var(--ink);font-weight:900;font-size:14px;}
+  .chatdemo .cd-head .dot{width:11px;height:11px;border-radius:50%;border:2px solid var(--ink);flex:0 0 auto;}
+  .chatdemo .cd-body{padding:16px;display:flex;flex-direction:column;gap:12px;background:#FFFDF8;}
+  .cd-row{display:flex;gap:9px;align-items:flex-end;}
+  .cd-row.me{flex-direction:row-reverse;}
+  .cd-av{flex:0 0 28px;width:28px;height:28px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;font-size:14px;background:#fff;}
+  .cd-bub{max-width:82%;border:2.5px solid var(--ink);border-radius:16px;padding:9px 12px;font-size:13.5px;line-height:1.5;}
+  .cd-row.me .cd-bub{background:#FFE7D3;border-bottom-right-radius:5px;}
+  .cd-row.ai .cd-bub{background:#fff;border-bottom-left-radius:5px;}
+
+  /* ---- service cards (method B) ---- */
+  .scard-b{border:3px solid var(--ink);border-radius:22px;padding:24px;box-shadow:var(--shadow);}
+  .scard-b.gpt{background:#F0F9F5;border-top:8px solid #10A37F;}
+  .scard-b.gem{background:#F5F0FF;border-top:8px solid #7B40C0;}
+  .scard-b.fire{background:#FFF4E8;border-top:8px solid #E8691A;}
+  .scard-b h3{font-size:18px;font-weight:900;margin-bottom:10px;}
+  .scard-b ol{margin:0;padding-left:20px;}
+  .scard-b li{margin:6px 0;color:var(--ink-soft);font-size:15px;}
+  .scard-b li b{color:var(--ink);}
+
+  /* ---- warn / note box ---- */
+  .notebox{border:3px solid var(--ink);border-radius:18px;padding:20px 24px;box-shadow:var(--shadow-sm);margin-bottom:24px;}
+  .notebox.warn{background:#FFF0EC;border-left:6px solid var(--warn);}
+  .notebox.tip{background:#E8F8F1;border-left:6px solid var(--ok);}
+  .notebox b{color:var(--ink);}
 </style>
 </head>
 <body>
@@ -192,8 +226,8 @@
 
   <header class="hero">
     <span class="eyebrow">크로노스피어 · 랜드마크 아이콘</span>
-    <h1>스테이지 랜드마크를<br><span class="pop">Higgsfield로 만드는 법</span></h1>
-    <p class="lead">스테이지 배경 이미지를 참조해 랜드마크 아이콘 PNG를 생성합니다.<br>셀쉐이딩 아이소메트릭 아이콘 &mdash; Higgsfield gpt_image_2_5 전용 가이드.</p>
+    <h1>스테이지 랜드마크<br><span class="pop">아이콘 만드는 법</span></h1>
+    <p class="lead">스테이지 배경 이미지를 참조해 랜드마크 아이콘 PNG를 생성합니다.<br>Higgsfield(권장) 또는 지피티·제미나이 웹 UI &mdash; 화풍과 규격은 동일.</p>
     <div class="stats">
       <div class="stat"><div class="dot dot-lm"></div>gpt_image_2_5 &middot; 1k 해상도</div>
       <div class="stat"><div class="dot dot-ok"></div>01~23 + EX01~11 완료</div>
@@ -201,10 +235,16 @@
     </div>
   </header>
 
+  <div class="paths-note">
+    <span class="chip"><span class="dot" style="background:var(--landmark)"></span>방법 A · Higgsfield (권장)</span>
+    <span class="chip"><span class="dot" style="background:#10A37F"></span>방법 B · 지피티 / 제미나이</span>
+  </div>
+
+  <!-- PATH A -->
   <section>
     <div class="sec-head">
-      <h2>6단계 제작 순서</h2>
-      <span class="badge-rec">Step-by-step</span>
+      <h2>방법 A · Higgsfield</h2>
+      <span class="badge-rec">권장 · Claude Code 필요</span>
     </div>
     <p class="sec-sub">신규 스테이지 하나당 이 순서대로 진행합니다.</p>
     <div class="steps">
@@ -451,9 +491,143 @@ No text, no UI elements. Same art style as the reference images.</pre>
     </div>
   </section>
 
+  <!-- PATH B -->
+  <section>
+    <div class="sec-head">
+      <h2>🌐 방법 B · 지피티 / 제미나이</h2>
+    </div>
+    <p class="sec-sub">Higgsfield 계정 없이 브라우저만으로 만드는 방법입니다.<br>스타일 규격은 방법 A와 동일 &mdash; 투명 배경만 후처리가 한 단계 추가됩니다.</p>
+
+    <div class="notebox warn">
+      <b>⚠️ 투명 배경(알파) 처리 필요</b><br>
+      지피티·제미나이는 투명 PNG를 직접 출력하지 않습니다. <b>흰 배경으로 생성 → 배경 제거</b> 순서로 진행하세요.<br>
+      Adobe Firefly(firefly.adobe.com)는 <b>투명 배경 PNG를 직접 출력</b>해 후처리 없이 사용 가능합니다.
+    </div>
+
+    <div class="notebox tip">
+      <b>✅ 스타일 레퍼런스 첨부 방법</b><br>
+      화풍 통일을 위해 기존 랜드마크(예: <code>11_Ice_Cave.png</code>, <code>21_Witch's_Altar.png</code>)를<br>
+      대화창에 <b>이미지 첨부</b>하고 "이 스타일로 만들어줘"라고 지시하면 화풍이 훨씬 잘 맞아집니다.
+    </div>
+
+    <!-- CHAT MOCKUP -->
+    <div class="chatdemo reveal">
+      <div class="cd-head"><span class="dot" style="background:#10a37f"></span>💬 ChatGPT / 🟢 Gemini &mdash; 대화 흐름 예시</div>
+      <div class="cd-body">
+        <div class="cd-row me"><div class="cd-av">🧑</div><div class="cd-bub">[기존 랜드마크 이미지 첨부]<br>이 스타일로, 아이소메트릭 탑다운 뷰의 랜드마크 아이콘을 만들어줘. 아래 프롬프트 그대로 써줘.<br><br>(아래 복붙 프롬프트 전체 붙여넣기)</div></div>
+        <div class="cd-row ai"><div class="cd-av">🤖</div><div class="cd-bub">[1:1 정방형 아이콘 이미지 생성됨]</div></div>
+        <div class="cd-row me"><div class="cd-av">🧑</div><div class="cd-bub">외곽선을 더 얇게, 그라디언트 없이 플랫하게 다시 그려줘</div></div>
+        <div class="cd-row ai"><div class="cd-av">🤖</div><div class="cd-bub">[수정본 생성됨]</div></div>
+        <div class="cd-row me"><div class="cd-av">🧑</div><div class="cd-bub">컨셉 B 버전도 만들어줘. 오브젝트만 [다른 구조물]로 바꾸고 나머지 스타일은 동일하게</div></div>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--ink-soft);font-size:14px;margin:12px 0 28px">같은 대화에서 계속 수정하면 스타일 일관성이 유지됩니다.</p>
+
+    <!-- SERVICE CARDS -->
+    <div class="grid2 reveal">
+      <div class="scard-b gpt">
+        <h3>💬 ChatGPT (chatgpt.com)</h3>
+        <ol>
+          <li><b>로그인</b> &mdash; chatgpt.com, 이미지 생성은 Plus/Pro 플랜 필요</li>
+          <li><b>레퍼런스 첨부</b> &mdash; 기존 랜드마크 PNG를 대화창에 업로드</li>
+          <li><b>프롬프트 입력</b> &mdash; 아래 복붙 프롬프트 전체를 붙여넣기</li>
+          <li><b>1:1 비율</b> &mdash; "정사각형(1:1)으로 그려줘" 또는 Size 옵션에서 <b>1024×1024</b> 선택</li>
+          <li><b>다운로드 → 배경 제거</b> &mdash; remove.bg 또는 Adobe Express로 흰 배경 제거</li>
+        </ol>
+        <p style="margin:10px 0 0;font-size:13px;color:var(--ink-soft)">👍 셀쉐이딩 표현이 비교적 정확. 한 번에 1장씩 생성.</p>
+      </div>
+      <div class="scard-b gem">
+        <h3>🟢 Gemini (gemini.google.com)</h3>
+        <ol>
+          <li><b>로그인</b> &mdash; gemini.google.com 또는 <a href="https://aistudio.google.com" target="_blank" rel="noopener">AI Studio</a>(더 정밀한 제어)</li>
+          <li><b>레퍼런스 첨부</b> &mdash; 기존 랜드마크 PNG를 첨부</li>
+          <li><b>프롬프트 입력</b> &mdash; 아래 복붙 프롬프트 전체를 붙여넣기</li>
+          <li><b>1:1 비율</b> &mdash; "정사각형으로 그려줘" 요청. 비율이 어긋나면 "1:1 비율로 다시"</li>
+          <li><b>다운로드 → 배경 제거</b> &mdash; remove.bg 또는 Adobe Express로 흰 배경 제거</li>
+        </ol>
+        <p style="margin:10px 0 0;font-size:13px;color:var(--ink-soft)">👍 빠른 생성, 여러 변형을 한 번에 볼 수 있음.</p>
+      </div>
+    </div>
+
+    <div class="scard-b fire reveal" style="margin-top:18px">
+      <h3>🔥 Adobe Firefly (firefly.adobe.com) &mdash; 투명 배경 직접 출력</h3>
+      <ol style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px;margin:10px 0 0;padding-left:20px">
+        <li><b>로그인</b> &mdash; Adobe 계정 (무료 크레딧 제공)</li>
+        <li><b>Text to Image</b> 선택, <b>Aspect ratio: Square (1:1)</b></li>
+        <li><b>Content type: Graphic</b>, <b>Photo settings: None</b></li>
+        <li><b>Reference image 업로드</b> &mdash; 기존 랜드마크 PNG 첨부</li>
+        <li>아래 복붙 프롬프트 입력</li>
+        <li><b>Generate</b> 후 <b>Download &rarr; PNG with transparent background</b> 선택</li>
+      </ol>
+      <p style="margin:10px 0 0;font-size:13px;color:var(--ink-soft)">👍 <b>투명 배경 PNG를 별도 후처리 없이 직접 다운로드</b> 가능 &mdash; 랜드마크 작업에 가장 적합.</p>
+    </div>
+
+    <!-- COPY-PASTE PROMPT FOR WEB UI -->
+    <div style="margin-top:32px">
+      <div class="sec-head" style="margin-bottom:8px">
+        <h3 style="font-size:22px;font-weight:900;">📋 복붙 프롬프트 (웹 UI 공통)</h3>
+      </div>
+      <p class="sec-sub"><code style="font-size:13px;">[대괄호]</code> 부분만 바꾸면 됩니다. 레퍼런스 이미지를 함께 첨부하면 화풍 일관성이 높아집니다.</p>
+      <div class="prompt-box reveal">
+<pre>Mobile game UI icon, isometric top-down view at 30 degrees.
+Square canvas (1:1). <span class="kw">White background.</span>
+
+<span class="ph">[스테이지명]</span> landmark &mdash; <span class="ph">[컨셉명]</span>:
+<span class="ph">[주요 오브젝트 설명 &mdash; 3~4개 요소만. 크기/색상 명시]</span>
+<span class="ph">[크기 리듬: "1 large (100%), 2 medium (60%), 2 small (35%)"]</span>
+
+<span class="kw">BASE:</span> Flat circular disc of <span class="ph">[concept material]</span>.
+Natural material cutoff edge &mdash; clean, defined.
+NO decorative border or rim.
+
+<span class="kw">STYLE:</span>
+- Simplified stylized cartoon art, bold rounded shapes.
+  Mobile game icon level of detail. Deformed cartoon proportions.
+  Only 3-4 main visual elements. NOT realistic.
+- <span class="kw">Thin clean black outlines</span> &mdash; NOT thick, fine lines only.
+- Hard-edge flat cel-shading, 3 tonal zones
+  (bright highlight / mid-tone / deep shadow). NOT gradient.
+- Controlled saturation &mdash; NOT neon, NOT over-vivid.
+- No outer glow. Localized light-source glow only.
+
+Fantasy RPG mobile game icon art.
+Circular composition, 75-80% frame fill. No text, no UI elements.</pre>
+      </div>
+    </div>
+
+    <!-- POST PROCESSING -->
+    <div class="step reveal" style="margin-top:24px">
+      <div class="num" style="background:var(--ok);">+1</div>
+      <div>
+        <div class="tag">후처리 (방법 B 전용)</div>
+        <h3>배경 제거 &rarr; PNG 저장</h3>
+        <p>Adobe Firefly 외의 툴로 생성한 경우, 흰 배경을 제거해 투명 PNG로 변환합니다.</p>
+        <div class="grid2" style="margin-top:14px;gap:12px">
+          <div style="border:2.5px solid var(--ink);border-radius:14px;padding:14px 16px;background:#EFF6FF;">
+            <b style="font-size:14px">🌐 remove.bg</b><br>
+            <span style="font-size:13px;color:var(--ink-soft)">remove.bg 접속 → 이미지 업로드 → 자동 배경 제거 → PNG 다운로드. 무료 5회/월, 그 이상은 유료.</span>
+          </div>
+          <div style="border:2.5px solid var(--ink);border-radius:14px;padding:14px 16px;background:#FFF1E4;">
+            <b style="font-size:14px">🎨 Adobe Express / Photopea</b><br>
+            <span style="font-size:13px;color:var(--ink-soft)">Adobe Express: 배경 제거 무료. Photopea(photopea.com): 포토샵과 동일한 웹 편집기, 무료.</span>
+          </div>
+        </div>
+        <p style="margin-top:14px;font-size:14px;color:var(--ink-soft)">
+          ⚠️ 배경 제거 후 <b>원형 아이콘 경계가 깔끔한지</b> 확인하세요. 외곽선이 흐릿하게 잘리면 Photopea에서 손수정합니다.
+        </p>
+      </div>
+    </div>
+
+    <p style="margin-top:20px;padding:14px 18px;background:#FFF0EC;border:2.5px solid var(--ink);border-radius:14px;font-size:14px;color:var(--ink-soft)">
+      ⚠️ <b>화풍·스타일은 사람이 직접 챙겨야 합니다.</b> 반복 생성이나 대량 배치는 방법 A(Higgsfield)가 훨씬 빠릅니다.
+    </p>
+  </section>
+
+  <!-- ANCHOR TABLE (Method A only) -->
   <section>
     <div class="sec-head">
       <h2>앵커 파일 테이블</h2>
+      <span class="badge-rec">방법 A 전용</span>
     </div>
     <p class="sec-sub">테마에 맞는 파일 2개 + <code>landmark_base.png</code>를 함께 업로드하세요.<br>
     media_id는 세션마다 만료 &mdash; 새 세션에서는 재업로드 필요.</p>
